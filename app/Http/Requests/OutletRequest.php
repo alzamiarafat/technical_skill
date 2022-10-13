@@ -13,7 +13,7 @@ class OutletRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,24 @@ class OutletRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'max:70'],
+            'user_id' => ['required'],
+            'phone' => ['required'],
+            'latitude' => ['required'],
+            'longitude' => ['required'],
+            'image' => ['required'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => "this is required", 
+            'user_id.required' => "this is required",
+            'phone.required' => "this is required",
+            'latitude.required' => "this is required",
+            'longitude.required' => "this is required",
+            'image.required' => "this is required",
         ];
     }
 }
