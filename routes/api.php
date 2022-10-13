@@ -26,5 +26,6 @@ Route::post('login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->group( function () {
     Route::apiResource('users',UserController::class)->except('create', 'edit');
     Route::apiResource('outlets',OutletController::class)->except('create', 'edit');
+    Route::get('show/outlet-google-map', [OutletController::class, 'show_outlet_google_map'])->name('outlet.google-map');
 });
 

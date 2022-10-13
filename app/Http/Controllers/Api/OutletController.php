@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Outlet;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\OutletRequest;
 use Validator;
 use App\Http\Resources\OutletResource;
 
@@ -16,7 +14,7 @@ class OutletController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return
      */
     public function index()
     {
@@ -28,7 +26,7 @@ class OutletController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return
      */
     public function store(Request $request)
     {
@@ -53,12 +51,12 @@ class OutletController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return
      */
     public function show($id)
     {
         $outlet = Outlet::where('id', $id)->first();
-        return new UserResource($outlet);
+        return new OutletResource($outlet);
     }
 
     /**
@@ -66,7 +64,7 @@ class OutletController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return
      */
     public function update(Request $request, $id)
     {
@@ -102,8 +100,14 @@ class OutletController extends Controller
      * validation check.
      *
      * @param  int  $id
-     * @return 
+     * @return
      */
+    public function show_outlet_google_map()
+    {
+        $outlets = Outlet::where('user_id', Auth::user()->id)->select('name','latitude', 'longitude')->get();
+        return response()->json($outlets);
+    }
+
     public function validation($request)
     {
         $validator = Validator::make($request->all(), [
@@ -116,4 +120,6 @@ class OutletController extends Controller
 
         return $validator;
     }
+
+
 }

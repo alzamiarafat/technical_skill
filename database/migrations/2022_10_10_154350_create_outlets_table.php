@@ -20,7 +20,7 @@ class CreateOutletsTable extends Migration
             $table->string('phone');
             $table->float('latitude');
             $table->float('longitude');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
