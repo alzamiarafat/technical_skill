@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -49,7 +48,6 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->first();
-
         return new UserResource($user);
     }
 
@@ -67,7 +65,6 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
-
         return new UserResource($user);
     }
 
